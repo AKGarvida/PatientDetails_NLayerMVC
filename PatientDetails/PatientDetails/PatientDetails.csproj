@@ -91,6 +91,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\HPLogo.gif" />
+    <Content Include="Scripts\TooltipModal.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -117,7 +118,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Scripts\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
