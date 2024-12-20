@@ -91,7 +91,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\HPLogo.gif" />
-    <Content Include="Scripts\TooltipModal.js" />
+    <Content Include="Scripts\Modal.js" />
+    <Content Include="Scripts\Tooltip.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -108,6 +109,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Patient\Index.cshtml" />
+    <Content Include="Views\Patient\Create.cshtml" />
+    <Content Include="Views\Patient\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -118,6 +121,24 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PatientDetails_BLL\PatientDetails_BLL.csproj">
+      <Project>{cb4d3dbd-0a77-4c4f-9200-def84efcc09a}</Project>
+      <Name>PatientDetails_BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PatientDetails_DAL\PatientDetails_DAL.csproj">
+      <Project>{5ca39b84-4688-4b4f-8821-99c03ec1877d}</Project>
+      <Name>PatientDetails_DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PatientDetails_Entities\PatientDetails_Entities.csproj">
+      <Project>{6dd0ac4e-6793-4656-87f1-cc5dc83b0634}</Project>
+      <Name>PatientDetails_Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PatientDetails_Utilities\PatientDetails_Utilities.csproj">
+      <Project>{5da53f9c-ee4a-48f6-8cab-d3850fd9daa9}</Project>
+      <Name>PatientDetails_Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
