@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using PatientDetails_Entities;
 using System.Web.Mvc;
 
 namespace PatientDetails.Controllers
@@ -11,6 +12,7 @@ namespace PatientDetails.Controllers
         // GET: Patient
         public ActionResult Index()
         {
+
             return View();
         }
 
@@ -18,7 +20,11 @@ namespace PatientDetails.Controllers
         {
             return View();
         }
-
+        [HttpPost]
+        public ActionResult Create(PatientDetailEntities pdEntities)
+        {
+            return View();
+        }
         public ActionResult Edit()
         {
             return View();
