@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using PatientDetails_Entities;
 using System.Web.Mvc;
 using PatientDetails_BLL;
@@ -10,17 +7,32 @@ namespace PatientDetails.Controllers
 {
     public class PatientController : Controller
     {
+        private readonly CreateBLL _createBll;
+
+        public PatientController()
+        {
+            _createBll = new CreateBLL();
+        }
+
         // GET: Patient
         public ActionResult Index()
         {
+            var bll = new CreateBLL();
+            var patients = bll.GetPatients();
 
-            return View();
+            if (patients == null)
+            {
+                TempData["Error"] = "Failed to retrieve patient records.";
+            }
+            return View(patients);
         }
 
+        // GET: Create Patient
         public ActionResult Create()
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Create(PatientDetailEntities pdEntities)
         {
@@ -32,21 +44,18 @@ namespace PatientDetails.Controllers
 
             try
             {
-                // Delegate business logic to the BLL
-                var createService = new CreateBLL();
-                var result = createService.CreatePatient(pdEntities);
+                var result = _createBll.CreatePatient(pdEntities);
 
                 if (result != null)
                 {
                     TempData["Success"] = "Patient record created successfully.";
                     return RedirectToAction("Index");
                 }
+
                 TempData["Error"] = "Failed to create patient record. Please try again.";
             }
             catch (Exception ex)
             {
-                // Log exception
-
                 TempData["Error"] = $"An error occurred: {ex.Message}";
             }
 

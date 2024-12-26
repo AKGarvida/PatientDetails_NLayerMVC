@@ -12,11 +12,8 @@ namespace PatientDetails_Entities
     {
         public int ID { get; set; }
         public DateTime ModifiedDate { get; set; }
-        [Required(ErrorMessage = "Please fill the content area")]
-        public double Dosage { get; set; }
-        [Required(ErrorMessage = "Please fill the content area")]
+        public Decimal Dosage { get; set; }
         public string Drug { get; set; }
-        [Required(ErrorMessage = "Please fill the content area")]
         public string Patient { get; set; }
         public bool Deleted_At { get; set; }
     }

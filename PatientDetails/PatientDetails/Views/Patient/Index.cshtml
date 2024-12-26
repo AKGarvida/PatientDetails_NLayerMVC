@@ -6,120 +6,76 @@
 }
 
 
-<div class="card mb-3" style="border-width: 2px; border-color: #000000">
-    <!-- Content Section -->
-    <div class="container-fluid mt-4">
-        <!-- Section Header -->
-        <div class="card-header" style="border-width: 2px; border-color: #000000">
-            <h2 class="text-left fw-bold">Patient Details</h2>
-        </div>
-        <div class="card-body" style="border-width: 2px; border-color: #000000">
-            <!-- Horizontal Divider -->
-            <div style="height: 5px; background-color: black; margin: 20px 0;"></div>
+<div class="card m-3" style="border-width: 2px; border-color: #000000">
+    <!-- head -->
+    <div class="card-header bg-dark" style="border-width: 2px; border-color: #000000">
+        <h2 class="text-left fw-bold" style="color: white;">Patient Details</h2>
+    </div>
+    <div class="card-body container-fluid" style="border-width: 2px; border-color: #000000">
 
-            <!-- Create New Record Button -->
-            <button type="button" id="createnewrecordBtn" class="btn btn-light fw-bold align-baseline"
-                    data-bs-toggle="tooltip" title="Go to create" onclick="window.location.href = '/Patient/Create'"
-                    style="font-size: 20px; margin-bottom: 10px; border: none;">
-                Create New Record
-            </button>
+        <!-- Create New Record Button -->
+        <button type="button" id="createnewrecordBtn" class="btn btn-light fw-bold align-baseline"
+                data-bs-toggle="tooltip" title="Go to create" onclick="window.location.href = '/Patient/Create'"
+                style="font-size: 20px; margin-bottom: 10px; border: none;">
+            Create New Record
+        </button>
 
-            <!-- Patient Table -->
-            <div class="table-responsive">
-                <table class="table table-dark table-hover text-center align-middle">
-                    <thead>
-                        <!-- Row for Search Filters -->
-                        <tr>
-                            <th style="font-size: 20px;">Search By:</th>
-                            <!-- Search by Date -->
-                            <th><input type="date" class="form-control" id="date" placeholder="Date" data-bs-toggle="tooltip" title="Select Date"></th>
-                            <!-- Search by Dosage -->
-                            <th><input type="text" class="form-control" id="dosage" placeholder="Dosage"></th>
-                            <!-- Search by Drug -->
-                            <th><input type="text" class="form-control" id="drug" placeholder="Drug"></th>
-                            <!-- Search by Patient -->
-                            <th><input type="text" class="form-control" id="patient" placeholder="Patient Name"></th>
-                            <!-- Reset Search Button -->
-                            <th>
-                                <button type="button" id="resetBtn" class="btn btn-link fw-bold text-white" style="font-size: 20px;"
-                                        data-bs-toggle="tooltip" title="Reset searches">
-                                    Reset
-                                </button>
-                            </th>
-                        </tr>
+        <div class="table-responsive">
+            <table class="table table-hover text-center align-middle">
+                <thead>
+                    <!-- Filters -->
+                    <tr class="bg-d ark">
+                        <th style="font-size: 20px;">Search By:</th>
+                        <th><input type="date" class="form-control" id="date" placeholder="Date" data-bs-toggle="tooltip" title="Select Date"></th>
+                        <th><input type="text" class="form-control" id="dosage" placeholder="Dosage"></th>
+                        <th><input type="text" class="form-control" id="drug" placeholder="Drug"></th>
+                        <th><input type="text" class="form-control" id="patient" placeholder="Patient Name"></th>
 
-                        <!-- Column Headers -->
+                        <th>
+                            <button type="button" id="resetBtn" class="btn btn-link fw-bold text-black" style="font-size: 20px;"
+                                    data-bs-toggle="tooltip" title="Reset searches" onclick="resetFilters()">
+                                Reset
+                            </button>
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th></th>
+                        <th>Date</th>
+                        <th>Dosage</th>
+                        <th>Drug</th>
+                        <th>Patient</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var patient in Model)
+                    {
                         <tr>
-                            <th></th>
-                            <th>Date</th>
-                            <th>Dosage</th>
-                            <th>Drug</th>
-                            <th>Patient</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Example Patient Records -->
-                        <tr>
-                            <td>
-                                <!-- Edit and Delete Buttons for Record -->
+                            <td style="background-color: white;">
                                 <button type="button" class="btn btn-primary me-2" data-bs-toggle="tooltip" title="Edit Record">Edit</button>
                                 <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete Record">Delete</button>
                             </td>
-                            <td>19/12/2024</td>
-                            <td>1.50</td>
-                            <td>Biogesic</td>
-                            <td>John Clarence Perades</td>
-                            <td></td>
+                            <td style="background-color: white; color: black;">@patient.ModifiedDate.ToString("dd/MM/yyyy")</td>
+                            <td style="background-color: white; color: black;">@patient.Dosage</td>
+                            <td style="background-color: white; color: black;">@patient.Drug</td>
+                            <td style="background-color: white; color: black;">@patient.Patient</td>
+                            <td style="background-color: white; color: black;"></td>
                         </tr>
-                        <!-- Additional Records -->
-                        <tr>
-                            <td>
-                                <button type="button" class="btn btn-primary me-2" data-bs-toggle="tooltip" title="Edit Record">Edit</button>
-                                <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete Record">Delete</button>
-                            </td>
-                            <td>19/12/2024</td>
-                            <td>2.00</td>
-                            <td>Paracetamol</td>
-                            <td>Mary Moe Moe Sai D' Cow</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <button type="button" class="btn btn-primary me-2" data-bs-toggle="tooltip" title="Edit Record">Edit</button>
-                                <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete Record">Delete</button>
-                            </td>
-                            <td>19/12/2024</td>
-                            <td>0.75</td>
-                            <td>Ibuprofen</td>
-                            <td>Julie Dooley Doughnuts Coconuts</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <button type="button" class="btn btn-primary me-2" data-bs-toggle="tooltip" title="Edit Record">Edit</button>
-                                <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete Record">Delete</button>
-                            </td>
-                            <td>19/12/2024</td>
-                            <td>3.75</td>
-                            <td>Tempra</td>
-                            <td>Peter Griffin</td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                    }
+                </tbody>
+            </table>
         </div>
-        <div class=" card-footer" style="border-width: 2px; border-color: #000000">
-            <!-- Pagination Controls -->
-            <ul class="pagination d-flex justify-content-center">
-                <li class="page-item"><a class="page-link text-white bg-dark" href="#">Previous</a></li>
-                <li class="page-item active"><a class="page-link text-white bg-dark" href="#">1</a></li>
-                <li class="page-item"><a class="page-link text-white bg-dark" href="#">2</a></li>
-                <li class="page-item"><a class="page-link text-white bg-dark" href="#">3</a></li>
-                <li class="page-item"><a class="page-link text-white bg-dark" href="#">Next</a></li>
-            </ul>
-        </div>
+    </div>
+    <div class=" card-footer" style="border-width: 2px; border-color: #000000">
+        <!-- page number -->
+        <ul class="pagination d-flex justify-content-center">
+            <li class="page-item"><a class="page-link text-white bg-dark" href="#">Previous</a></li>
+            <li class="page-item active"><a class="page-link text-white bg-dark" href="#">1</a></li>
+            <li class="page-item"><a class="page-link text-white bg-dark" href="#">2</a></li>
+            <li class="page-item"><a class="page-link text-white bg-dark" href="#">3</a></li>
+            <li class="page-item"><a class="page-link text-white bg-dark" href="#">Next</a></li>
+        </ul>
     </div>
 </div>
 <!-- Modal for Edit/Delete -->
@@ -131,7 +87,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="modalBody">
-                <!-- Content will be set dynamically -->
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -141,3 +97,4 @@
     </div>
 </div>
 <script src="~/Scripts/EditDeleteModal.js"></script>
+<script src="~/Scripts/ResetButton.js"></script>

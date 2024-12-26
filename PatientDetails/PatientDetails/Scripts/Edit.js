@@ -11,7 +11,7 @@ $(document).ready(function () {
             // Show error alert if validation fails
             $('#eAlert').removeClass('d-none').fadeIn();
 
-            return; // Stop further execution if validation fails
+            return;
         }
 
         $.ajax({
@@ -38,12 +38,11 @@ $(document).ready(function () {
                 }, 3000);
             },
             error: function (xhr, status, error) {
-                // Handle errors
                 console.error('Error: ' + error);
             }
         });
     });
     $('#clr').on('click', function () {
-        $('#edit')[0].reset(); // Resets all input fields
+        $('#edit')[0].reset();
     });
 });

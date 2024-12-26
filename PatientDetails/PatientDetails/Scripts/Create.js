@@ -10,7 +10,7 @@ $(document).ready(function () {
             // Show error alert if validation fails
             $('#eAlert').removeClass('d-none').fadeIn();
 
-            return; // Stop further execution if validation fails
+            return;
         }
 
         $.ajax({
@@ -31,18 +31,18 @@ $(document).ready(function () {
                 // Handle the success response
                 console.log(response);
 
-                // Redirect after a short delay if needed
+                // Redirection delay
                 setTimeout(function () {
                     window.location.href = '/Patient/Index';
                 }, 3000);
             },
-            error: function (xhr, status, error) {
-                // Handle errors
+            error: function (xhr, status, error)
+            {             
                 console.error('Error: ' + error);
             }
         });
     });
     $('#clr').on('click', function () {
-        $('#create')[0].reset(); // Resets all input fields
+        $('#create')[0].reset();
     });
 });

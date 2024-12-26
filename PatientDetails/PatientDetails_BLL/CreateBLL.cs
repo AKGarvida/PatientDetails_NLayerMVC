@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using PatientDetails_DAL.Service;
 using PatientDetails_Entities;
 
@@ -13,6 +14,19 @@ namespace PatientDetails_BLL
             _patientRecordDal = new PatientRecordDAL();
         }
 
+        public List<PatientDetailEntities> GetPatients()
+        {
+            try
+            {
+                return _patientRecordDal.GetPatients();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in GetPatients method: {ex.Message}");
+                throw;
+            }
+        }
+
         /// Validates the patient data and insertion database to the DAL layer.
         public PatientDetailEntities CreatePatient(PatientDetailEntities patient)
         {
@@ -20,12 +34,10 @@ namespace PatientDetails_BLL
 
             try
             {
-                // Delegate to DAL for database operation
                 return _patientRecordDal.CreatePD(patient);
             }
             catch (Exception ex)
             {
-                // Log exception
                 Console.WriteLine($"Error in CreatePatient method: {ex.Message}");
                 throw; 
             }
