@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using PatientDetails_Entities;
 using System.Web.Mvc;
+using PatientDetails_BLL;
 
 namespace PatientDetails.Controllers
 {
@@ -23,8 +24,35 @@ namespace PatientDetails.Controllers
         [HttpPost]
         public ActionResult Create(PatientDetailEntities pdEntities)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                TempData["Error"] = "Invalid data. Please check the form inputs.";
+                return View(pdEntities);
+            }
+
+            try
+            {
+                // Delegate business logic to the BLL
+                var createService = new CreateBLL();
+                var result = createService.CreatePatient(pdEntities);
+
+                if (result != null)
+                {
+                    TempData["Success"] = "Patient record created successfully.";
+                    return RedirectToAction("Index");
+                }
+                TempData["Error"] = "Failed to create patient record. Please try again.";
+            }
+            catch (Exception ex)
+            {
+                // Log exception
+
+                TempData["Error"] = $"An error occurred: {ex.Message}";
+            }
+
+            return View(pdEntities);
         }
+
         public ActionResult Edit()
         {
             return View();

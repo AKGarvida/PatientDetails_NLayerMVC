@@ -41,13 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="CreateBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PatientDetails_DAL\PatientDetails_DAL.csproj">
       <Project>{5ca39b84-4688-4b4f-8821-99c03ec1877d}</Project>
       <Name>PatientDetails_DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PatientDetails_Entities\PatientDetails_Entities.csproj">
+      <Project>{6dd0ac4e-6793-4656-87f1-cc5dc83b0634}</Project>
+      <Name>PatientDetails_Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\PatientDetails_Utilities\PatientDetails_Utilities.csproj">
       <Project>{5da53f9c-ee4a-48f6-8cab-d3850fd9daa9}</Project>

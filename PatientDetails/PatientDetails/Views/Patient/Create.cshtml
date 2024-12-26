@@ -16,15 +16,13 @@
 <!-- Centering container -->
 <div class="d-flex justify-content-center align-items-center" style="min-height: 70vh;">
 
-    <div class="card mb-3" style="max-width: 100%; min-width: 70%; ">
+    <div class="card mb-3" style="max-width: 100%; min-width: 70%; border-width: 2px; border-color: #000000">
 
-        <div class="card-header bg-dark">
+        <div class="card-header bg-dark" style="border-width: 2px; border-color: #000000">
             <h2 class="text-center text-white">Create New Patient Record</h2>
         </div>
 
-        <hr style="border: none; border-top: 5px solid #000000; width: 100%; margin: 20px 0;">
-
-        <div class="card-body">
+        <div class="card-body" style="border-width: 2px; border-color: #000000">
             <div class="d-flex justify-content-center">
                 @using (Html.BeginForm("Create", "PatientController", FormMethod.Post, new { @id = "create", @style = "width: 100%; max-width: 600px;" }))
                 {
@@ -44,7 +42,7 @@
             </div>
         </div>
 
-        <div class="card-footer">
+        <div class="card-footer" style="border-width: 2px; border-color: #000000">
             <div class="d-flex justify-content-center">
                 <button type="submit" id="save" class="btn btn-dark m-2" data-bs-toggle="tooltip" title="Save Changes">Save</button>
                 <button type="reset" id="clr" class="btn btn-dark m-2" data-bs-toggle="tooltip" title="Clear Input">Clear All</button>
