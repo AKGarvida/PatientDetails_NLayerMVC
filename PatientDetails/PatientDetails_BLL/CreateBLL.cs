@@ -14,11 +14,11 @@ namespace PatientDetails_BLL
             _patientRecordDal = new PatientRecordDAL();
         }
 
-        public List<PatientDetailEntities> GetPatients()
+        public List<PatientDetailEntities> GetPatients(string patientName = null, string drug = null, decimal? dosage = null, DateTime? modifiedDate = null)
         {
             try
             {
-                return _patientRecordDal.GetPatients();
+                return _patientRecordDal.GetPatients(patientName, drug, dosage, modifiedDate);
             }
             catch (Exception ex)
             {
@@ -27,7 +27,6 @@ namespace PatientDetails_BLL
             }
         }
 
-        /// Validates the patient data and insertion database to the DAL layer.
         public PatientDetailEntities CreatePatient(PatientDetailEntities patient)
         {
             ValidatePatientDetails(patient);
@@ -39,11 +38,10 @@ namespace PatientDetails_BLL
             catch (Exception ex)
             {
                 Console.WriteLine($"Error in CreatePatient method: {ex.Message}");
-                throw; 
+                throw;
             }
         }
 
-        /// Validates the patient details for required fields and valid data.
         private static void ValidatePatientDetails(PatientDetailEntities patient)
         {
             if (patient == null)

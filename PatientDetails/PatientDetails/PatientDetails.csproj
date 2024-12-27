@@ -94,8 +94,7 @@
     <Content Include="Scripts\AuthorModal.js" />
     <Content Include="Scripts\Create.js" />
     <Content Include="Scripts\Edit.js" />
-    <Content Include="Scripts\EditDeleteModal.js" />
-    <Content Include="Scripts\ResetButton.js" />
+    <Content Include="Scripts\Index.js" />
     <Content Include="Scripts\Tooltip.js" />
     <Content Include="Web.config" />
   </ItemGroup>

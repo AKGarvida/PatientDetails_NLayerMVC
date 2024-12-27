@@ -2,6 +2,8 @@
 using PatientDetails_Entities;
 using System.Web.Mvc;
 using PatientDetails_BLL;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PatientDetails.Controllers
 {
@@ -26,6 +28,32 @@ namespace PatientDetails.Controllers
             }
             return View(patients);
         }
+
+        [HttpGet]
+        public JsonResult FilterPatients(string date, string dosage, string drug, string patient)
+        {
+            try
+            {
+                DateTime? modifiedDate = string.IsNullOrWhiteSpace(date) ? (DateTime?)null : DateTime.Parse(date);
+                decimal? dosageValue = string.IsNullOrWhiteSpace(dosage) ? (decimal?)null : decimal.Parse(dosage);
+                var patients = _createBll.GetPatients(patient, drug, dosageValue, modifiedDate);
+                return Json(patients.Select(p => new
+                {
+                    p.ID,
+                    p.Dosage,
+                    p.Drug,
+                    p.Patient,
+                    ModifiedDate = p.ModifiedDate.ToString("yyyy-MM-dd")
+                }), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return Json(new List<object>(), JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
 
         // GET: Create Patient
         public ActionResult Create()

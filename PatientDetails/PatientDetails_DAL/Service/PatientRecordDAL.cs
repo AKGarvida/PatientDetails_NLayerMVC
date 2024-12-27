@@ -1,50 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using PatientDetails_Entities;
-using System.Data.SqlClient;
-using PatientDetails_DAL.DB;
 using System.Data;
+using System.Data.SqlClient;
+using PatientDetails_Entities;
+using PatientDetails_DAL.DB;
 
 namespace PatientDetails_DAL.Service
 {
     public class PatientRecordDAL
     {
-        public PatientDetailEntities CreatePD(PatientDetailEntities c)  
-        {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(MSSQLConnectionProvider.GetConnectionString()))
-                {
-                    using (SqlCommand cmd = new SqlCommand("spCreateNewPatient", conn))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandTimeout = MSSQLConnectionProvider.GetConnectionTimeout();
-
-                        // Parameters
-                        cmd.Parameters.Add("@Dosage", SqlDbType.Decimal).Value = c.Dosage;
-                        cmd.Parameters.Add("@Drug", SqlDbType.VarChar, 50).Value = c.Drug;
-                        cmd.Parameters.Add("@Patient", SqlDbType.VarChar, 50).Value = c.Patient;
-
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-                return c;
-            }
-            catch (SqlException ex)
-            {
-                Console.WriteLine("SQL Error: " + ex.Message);
-                throw;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error: " + ex.Message);
-                throw;
-            }
-        }
-
-        // Method to fetch all patients
-        public List<PatientDetailEntities> GetPatients(string patientName = null, string drug = null, decimal? dosage = null)
+        /// <summary>
+        /// Fetches a list of patients based on optional filter parameters.
+        /// </summary>
+        public List<PatientDetailEntities> GetPatients(string patientName = null, string drug = null, decimal? dosage = null, DateTime? modifiedDate = null)
         {
             var patients = new List<PatientDetailEntities>();
 
@@ -57,10 +25,11 @@ namespace PatientDetails_DAL.Service
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = MSSQLConnectionProvider.GetConnectionTimeout();
 
-                        // Parameters
+                        // Add parameters to the stored procedure
                         cmd.Parameters.Add("@Patient", SqlDbType.VarChar, 50).Value = (object)patientName ?? DBNull.Value;
                         cmd.Parameters.Add("@Drug", SqlDbType.VarChar, 50).Value = (object)drug ?? DBNull.Value;
                         cmd.Parameters.Add("@Dosage", SqlDbType.Decimal).Value = (object)dosage ?? DBNull.Value;
+                        cmd.Parameters.Add("@ModifiedDate", SqlDbType.Date).Value = (object)modifiedDate ?? DBNull.Value;
 
                         conn.Open();
 
@@ -96,6 +65,44 @@ namespace PatientDetails_DAL.Service
             }
 
             return patients;
+        }
+
+        /// <summary>
+        /// Inserts a new patient record into the database.
+        /// </summary>
+        public PatientDetailEntities CreatePD(PatientDetailEntities c)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(MSSQLConnectionProvider.GetConnectionString()))
+                {
+                    using (SqlCommand cmd = new SqlCommand("spCreateNewPatient", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandTimeout = MSSQLConnectionProvider.GetConnectionTimeout();
+
+                        // Parameters
+                        cmd.Parameters.Add("@Dosage", SqlDbType.Decimal).Value = c.Dosage;
+                        cmd.Parameters.Add("@Drug", SqlDbType.VarChar, 50).Value = c.Drug;
+                        cmd.Parameters.Add("@Patient", SqlDbType.VarChar, 50).Value = c.Patient;
+                        cmd.Parameters.Add("@ModifiedDate", SqlDbType.Date).Value = c.ModifiedDate;
+
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                return c;
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("SQL Error: " + ex.Message);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                throw;
+            }
         }
     }
 }
