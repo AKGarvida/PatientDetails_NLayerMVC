@@ -1,22 +1,11 @@
 ﻿@{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<!-- Success alert -->
-<div class="alert alert-success d-none position-fixed top-0 start-50 translate-middle-x mt-3" id="sAlert" style="z-index: 1050; width: 50%;">
-    <strong>Success!</strong> Patient record has been created successfully.
-</div>
-
-<!-- Error alert -->
-<div class="alert alert-danger d-none position-fixed top-0 start-50 translate-middle-x mt-3" id="eAlert" style="z-index: 1050; width: 50%;">
-    <strong>Error!</strong> Failed to save patient record.
-</div>
-
 <!-- Centering container -->
 <div class="d-flex justify-content-center align-items-center m-3" style="min-height: 70vh;">
-    
+
     <div class="card mb-3" style="max-width: 100%; min-width: 70%; border-width: 2px; border-color: #000000">
 
         <div class="card-header bg-dark" style="border-width: 2px; border-color: #000000">
@@ -24,20 +13,40 @@
         </div>
 
         <div class="card-body" style="border-width: 2px; border-color: #000000">
+            <!-- Alerts -->
+            <div class="mb-3">
+                <div class="alert alert-success d-none" id="sAlert" style="z-index: 1050;">
+                    <strong>Success!</strong> Patient record has been created successfully.
+                </div>
+                <div class="alert alert-danger d-none" id="eAlert" style="z-index: 1050;">
+                    <strong>Error!</strong> Failed to save patient record.
+                </div>
+            </div>
             <div class="d-flex justify-content-center">
                 @using (Html.BeginForm("Edit", "PatientController", FormMethod.Post, new { @id = "edit", @style = "width: 100%; max-width: 600px;" }))
                 {
-                    <div class="mb-3 mt-3 text-left">
-                        <label for="DosageAmount" style="margin-bottom: 10px; font-size: 20px;" class="fw-bold">Dosage</label>
-                        @Html.TextBox("dosageamount", null, new { @class = "form-control mx-auto", @id = "dsgamount", @style = "max-width: 60%;", @placeholder = "Dosage Amount" })
+                    <!-- Dosage Amount -->
+                    <div class="mb-4 mt-4 row align-items-center">
+                        <label for="DosageAmount" class="col-sm-3 col-form-label fw-bold" style="font-size: 20px;">Dosage</label>
+                        <div class="col-sm-9" data-bs-toggle="tooltip" title="Input Dosage Amount">
+                            @Html.TextBox("dosageamount", null, new { @class = "form-control", @id = "dsgamount", @placeholder = "Dosage Amount" })
+                        </div>
                     </div>
-                    <div class="mb-3 text-left">
-                        <label for="DrugName" style="margin-bottom: 10px; font-size: 20px;" class="fw-bold">Drug</label>
-                        @Html.TextBox("drugname", null, new { @class = "form-control mx-auto", @id = "drgname", @style = "max-width: 60%;", @placeholder = "Drug Name" })
+
+                    <!-- Drug Name -->
+                    <div class="mb-4 row align-items-center">
+                        <label for="DrugName" class="col-sm-3 col-form-label fw-bold" style="font-size: 20px;">Drug</label>
+                        <div class="col-sm-9" data-bs-toggle="tooltip" title="Input Drug Name">
+                            @Html.TextBox("drugname", null, new { @class = "form-control", @id = "drgname", @placeholder = "Drug Name" })
+                        </div>
                     </div>
-                    <div class="mb-3 text-left">
-                        <label for="PatientName" style="margin-bottom: 10px; font-size: 20px;" class="fw-bold">Patient</label>
-                        @Html.TextBox("pname", null, new { @class = "form-control mx-auto", @id = "pname", @style = "max-width: 60%;", @placeholder = "Enter Name" })
+
+                    <!-- Patient Name -->
+                    <div class="mb-4 row align-items-center">
+                        <label for="PatientName" class="col-sm-3 col-form-label fw-bold" style="font-size: 20px;">Patient</label>
+                        <div class="col-sm-9" data-bs-toggle="tooltip" title="Input Patient Name">
+                            @Html.TextBox("pname", null, new { @class = "form-control", @id = "pname", @placeholder = "Enter Name" })
+                        </div>
                     </div>
                 }
             </div>

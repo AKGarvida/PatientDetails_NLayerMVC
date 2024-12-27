@@ -14,19 +14,6 @@ namespace PatientDetails_BLL
             _patientRecordDal = new PatientRecordDAL();
         }
 
-        public List<PatientDetailEntities> GetPatients(string patientName = null, string drug = null, decimal? dosage = null, DateTime? modifiedDate = null)
-        {
-            try
-            {
-                return _patientRecordDal.GetPatients(patientName, drug, dosage, modifiedDate);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error in GetPatients method: {ex.Message}");
-                throw;
-            }
-        }
-
         public PatientDetailEntities CreatePatient(PatientDetailEntities patient)
         {
             ValidatePatientDetails(patient);
@@ -41,6 +28,20 @@ namespace PatientDetails_BLL
                 throw;
             }
         }
+
+        public List<PatientDetailEntities> GetPatients(string patientName = null, string drug = null, decimal? dosage = null, DateTime? modifiedDate = null)
+        {
+            try
+            {
+                return _patientRecordDal.GetPatients(patientName, drug, dosage, modifiedDate);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in GetPatients method: {ex.Message}");
+                throw;
+            }
+        }
+
 
         private static void ValidatePatientDetails(PatientDetailEntities patient)
         {

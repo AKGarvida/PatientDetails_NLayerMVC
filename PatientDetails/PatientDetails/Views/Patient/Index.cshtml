@@ -24,12 +24,12 @@
             <table class="table table-hover text-center align-middle">
                 <thead>
                     <!-- Filters -->
-                    <tr class="bg-d ark">
+                    <tr>
                         <th style="font-size: 20px;">Search By:</th>
                         <th><input type="date" class="form-control" id="date" placeholder="Date" data-bs-toggle="tooltip" title="Select Date"></th>
-                        <th><input type="text" class="form-control" id="dosage" placeholder="Dosage"></th>
-                        <th><input type="text" class="form-control" id="drug" placeholder="Drug"></th>
-                        <th><input type="text" class="form-control" id="patient" placeholder="Patient Name"></th>
+                        <th><input type="text" class="form-control" id="dosage" placeholder="Dosage" data-bs-toggle="tooltip" title="Input Amount"></th>
+                        <th><input type="text" class="form-control" id="drug" placeholder="Drug" data-bs-toggle="tooltip" title="Input Drug Name"></th>
+                        <th><input type="text" class="form-control" id="patient" placeholder="Patient Name" data-bs-toggle="tooltip" title="Input Patient Name"></th>
 
                         <th>
                             <button type="button" id="resetBtn" class="btn btn-link fw-bold text-black" style="font-size: 20px;"
@@ -51,16 +51,15 @@
                 <tbody>
                     @foreach (var patient in Model)
                     {
-                        <tr>
+                        <tr data-id="@patient.ID">
                             <td style="background-color: white;">
                                 <button type="button" class="btn btn-primary me-2" id="btnEdit" data-bs-toggle="tooltip" title="Edit Record">Edit</button>
-                                <button type="button" class="btn btn-danger" id="btnDelete" data-bs-toggle="tooltip" title="Delete Record">Delete</button>
+                                <button type="button" class="btn btn-danger" id="btnDelete" data-id="@patient.ID" data-bs-toggle="tooltip" title="Delete Record">Delete</button>
                             </td>
                             <td style="background-color: white; color: black;">@patient.ModifiedDate.ToString("dd/MM/yyyy")</td>
                             <td style="background-color: white; color: black;">@patient.Dosage</td>
                             <td style="background-color: white; color: black;">@patient.Drug</td>
                             <td style="background-color: white; color: black;">@patient.Patient</td>
-                            <td style="background-color: white; color: black;"></td>
                         </tr>
                     }
                 </tbody>

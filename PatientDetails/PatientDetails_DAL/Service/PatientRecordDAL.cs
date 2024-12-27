@@ -85,7 +85,6 @@ namespace PatientDetails_DAL.Service
                         cmd.Parameters.Add("@Dosage", SqlDbType.Decimal).Value = c.Dosage;
                         cmd.Parameters.Add("@Drug", SqlDbType.VarChar, 50).Value = c.Drug;
                         cmd.Parameters.Add("@Patient", SqlDbType.VarChar, 50).Value = c.Patient;
-                        cmd.Parameters.Add("@ModifiedDate", SqlDbType.Date).Value = c.ModifiedDate;
 
                         conn.Open();
                         cmd.ExecuteNonQuery();
