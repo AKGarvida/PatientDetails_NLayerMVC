@@ -94,5 +94,24 @@ namespace PatientDetails.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public JsonResult DeletePatient(int id)
+        {
+            try
+            {
+                bool isDeleted = _createBll.DeletePatient(id);
+                if (isDeleted)
+                {
+                    return Json(new { success = true, message = "Record deleted successfully." });
+                }
+                return Json(new { success = false, message = "Failed to delete record. Please try again." });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = $"An error occurred: {ex.Message}" });
+            }
+        }
+
     }
 }

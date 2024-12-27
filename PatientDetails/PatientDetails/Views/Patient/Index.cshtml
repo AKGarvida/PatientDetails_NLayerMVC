@@ -33,7 +33,7 @@
 
                         <th>
                             <button type="button" id="resetBtn" class="btn btn-link fw-bold text-black" style="font-size: 20px;"
-                                    data-bs-toggle="tooltip" title="Reset searches" onclick="resetFilters()">
+                                    data-bs-toggle="tooltip" title="Reset searches">
                                 Reset
                             </button>
                         </th>
@@ -54,7 +54,7 @@
                         <tr data-id="@patient.ID">
                             <td style="background-color: white;">
                                 <button type="button" class="btn btn-primary me-2" id="btnEdit" data-bs-toggle="tooltip" title="Edit Record">Edit</button>
-                                <button type="button" class="btn btn-danger" id="btnDelete" data-id="@patient.ID" data-bs-toggle="tooltip" title="Delete Record">Delete</button>
+                                <button type="button" class="btn btn-danger" id="btnDelete" data-bs-toggle="tooltip" title="Delete Record">Delete</button>
                             </td>
                             <td style="background-color: white; color: black;">@patient.ModifiedDate.ToString("dd/MM/yyyy")</td>
                             <td style="background-color: white; color: black;">@patient.Dosage</td>

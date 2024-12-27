@@ -65,5 +65,18 @@ namespace PatientDetails_BLL
                 throw new ArgumentException("Dosage must be greater than zero.", nameof(patient.Dosage));
             }
         }
+        public bool DeletePatient(int id)
+        {
+            try
+            {
+                return _patientRecordDal.DeletePatient(id);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in DeletePatient method: {ex.Message}");
+                throw;
+            }
+        }
+
     }
 }

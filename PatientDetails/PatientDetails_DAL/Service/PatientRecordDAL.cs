@@ -103,5 +103,37 @@ namespace PatientDetails_DAL.Service
                 throw;
             }
         }
+        public bool DeletePatient(int id)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(MSSQLConnectionProvider.GetConnectionString()))
+                {
+                    using (SqlCommand cmd = new SqlCommand("spDeletePatientRecord", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandTimeout = MSSQLConnectionProvider.GetConnectionTimeout();
+
+                        cmd.Parameters.Add("@ID", SqlDbType.Int).Value = id;
+
+                        conn.Open();
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        return rowsAffected > 0;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine("SQL Error: " + ex.Message);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                throw;
+            }
+        }
+
     }
 }
