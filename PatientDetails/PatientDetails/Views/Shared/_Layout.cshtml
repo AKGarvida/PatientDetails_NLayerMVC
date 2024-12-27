@@ -1,7 +1,6 @@
 ﻿@* Layout.cshtml *@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <!-- Document Title and Meta Information -->
     <title>@ViewData["Title"] - HealthTrackPro</title>
@@ -91,10 +90,14 @@
             </div>
         </div>
     </div>
-    <script src="~/Scripts/AuthorModal.js"> </script>
+    <script src="~/Scripts/AuthorModal.js"></script>
     <script src="~/Scripts/Tooltip.js"></script>
     @RenderSection("Scripts", required: false)
 
 </body>
-
 </html>
+
+<script>
+    //Focus on dosage amount
+    $('#dsgamount').focus();
+</script>

@@ -1,24 +1,20 @@
 ﻿$(document).ready(function () {
     // ------------- Delete & Edit Modal Script -------------
-    // Handle Delete Button Click dynamically for each row
     $(document).on('click', '.btn-danger', function () {
-        // Show confirmation modal
         $('#actionModalLabel').text('Delete Record');
         $('#modalBody').html('<p>Are you sure you want to delete this record?</p>');
         $('#confirmAction').text('Delete').removeClass('btn-primary').addClass('btn-danger');
         $('#actionModal').modal('show');
 
-        // Save the row reference to delete after confirmation
         const rowToDelete = $(this).closest('tr'); // Get the row containing the clicked button
 
         // Confirm Action
         $('#confirmAction').off('click').on('click', function () {
-            rowToDelete.remove(); // Remove the row
-            $('#actionModal').modal('hide'); // Hide the modal
+            rowToDelete.remove(); 
+            $('#actionModal').modal('hide'); 
         });
     });
 
-    // Handle Edit Button Click dynamically for each row
     $(document).on('click', '.btn-primary', function () {
         $('#actionModalLabel').text('Edit Record');
         $('#modalBody').html('<p>Do you want to edit this record?</p>');
@@ -28,7 +24,6 @@
 
     // ------------- Filtered Search Script -------------
     function ajaxFilterTable() {
-        // Get filter values
         const filters = {
             date: $("#date").val(),
             dosage: $("#dosage").val(),
@@ -36,18 +31,18 @@
             patient: $("#patient").val(),
         };
 
-        // Send AJAX request
+        // Check if any filter field has a value
+        toggleResetButton(filters);
+
         $.ajax({
-            url: "/Patient/FilterPatients", // Adjust this URL to match your route
+            url: "/Patient/FilterPatients", 
             type: "GET",
             data: filters,
             success: function (data) {
-                // Update table body with new data
                 const tbody = $("table tbody");
-                tbody.empty(); // Clear existing rows
+                tbody.empty(); 
 
                 if (data.length > 0) {
-                    // Populate rows with returned data
                     data.forEach(patient => {
                         tbody.append(`
                             <tr>
@@ -64,7 +59,6 @@
                         `);
                     });
                 } else {
-                    // Display a message if no records are found
                     tbody.append(`
                         <tr>
                             <td colspan="6" class="text-center">No records found</td>
@@ -78,18 +72,29 @@
         });
     }
 
-    // Attach event listeners to filter inputs
-    $("#date, #dosage, #drug, #patient").on("keyup change", ajaxFilterTable);
+    // Toggle reset button visibility based on filters
+    function toggleResetButton(filters) {
+        if (filters.date || filters.dosage || filters.drug || filters.patient) {
+            $("#resetBtn").show(); 
+        } else {
+            $("#resetBtn").hide(); 
+        }
+    }
 
-    // Reset filters
+    // Attach event listeners to filter inputs
+    $("#date, #dosage, #drug, #patient").on("keyup change", function () {
+        ajaxFilterTable();
+    });
+
+    // Reset filters when reset button is clicked
     $("#resetBtn").on("click", function () {
         $("#date").val("");
         $("#dosage").val("");
         $("#drug").val("");
         $("#patient").val("");
-        ajaxFilterTable();
+        ajaxFilterTable(); 
     });
 
-    // Initial table load
-    ajaxFilterTable();
+    // Initial table load and reset button visibility check
+    ajaxFilterTable(); 
 });
