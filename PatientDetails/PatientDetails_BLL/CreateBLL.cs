@@ -42,7 +42,6 @@ namespace PatientDetails_BLL
             }
         }
 
-
         private static void ValidatePatientDetails(PatientDetailEntities patient)
         {
             if (patient == null)
@@ -65,6 +64,24 @@ namespace PatientDetails_BLL
                 throw new ArgumentException("Dosage must be greater than zero.", nameof(patient.Dosage));
             }
         }
+
+        public PatientDetailEntities UpdatePatient(PatientDetailEntities patient)
+        {
+            ValidatePatientDetails(patient); 
+
+            try
+            {
+                return _patientRecordDal.UpdatePD(patient);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in UpdatePatient method: {ex.Message}");
+                throw;
+            }
+        }
+
+
+
         public bool DeletePatient(int id)
         {
             try

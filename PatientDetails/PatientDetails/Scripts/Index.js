@@ -10,7 +10,6 @@
         $('#actionModal').modal('show');
 
         $('#confirmAction').off('click').on('click', function () {
-
             $.ajax({
                 url: '/Patient/DeletePatient',
                 type: 'POST',
@@ -29,10 +28,18 @@
 
     // ------------- Edit Record Script -------------
     $(document).on('click', '.btn-primary', function () {
+        const patientId = $(this).closest('tr').data('id');
+        
         $('#actionModalLabel').text('Edit Record');
         $('#modalBody').html('<p>Do you want to edit this record?</p>');
         $('#confirmAction').text('Edit').removeClass('btn-danger').addClass('btn-primary');
         $('#actionModal').modal('show');
+
+        // Confirm edit action
+        $('#confirmAction').off('click').on('click', function () {
+            // Redirect to the Edit page once confirmed
+            window.location.href = `/Patient/Edit/${patientId}`;
+        });
     });
 
     // ------------- Filtered Search Script -------------

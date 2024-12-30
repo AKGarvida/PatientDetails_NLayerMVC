@@ -9,9 +9,7 @@ namespace PatientDetails_DAL.Service
 {
     public class PatientRecordDAL
     {
-        /// <summary>
         /// Fetches a list of patients based on optional filter parameters.
-        /// </summary>
         public List<PatientDetailEntities> GetPatients(string patientName = null, string drug = null, decimal? dosage = null, DateTime? modifiedDate = null)
         {
             var patients = new List<PatientDetailEntities>();
@@ -67,9 +65,7 @@ namespace PatientDetails_DAL.Service
             return patients;
         }
 
-        /// <summary>
         /// Inserts a new patient record into the database.
-        /// </summary>
         public PatientDetailEntities CreatePD(PatientDetailEntities c)
         {
             try
@@ -103,6 +99,35 @@ namespace PatientDetails_DAL.Service
                 throw;
             }
         }
+
+        public PatientDetailEntities UpdatePD(PatientDetailEntities c)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(MSSQLConnectionProvider.GetConnectionString()))
+                {
+                    using (SqlCommand cmd = new SqlCommand("spUpdatePatientRecord", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@ID", SqlDbType.Int).Value = c.ID;
+                        cmd.Parameters.Add("@Dosage", SqlDbType.Decimal).Value = c.Dosage;
+                        cmd.Parameters.Add("@Drug", SqlDbType.VarChar, 50).Value = c.Drug;
+                        cmd.Parameters.Add("@Patient", SqlDbType.VarChar, 50).Value = c.Patient;
+
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                return c; // Ensure the updated patient object is returned
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in UpdatePD: {ex.Message}");
+                throw;
+            }
+        }
+
+
         public bool DeletePatient(int id)
         {
             try
@@ -134,6 +159,5 @@ namespace PatientDetails_DAL.Service
                 throw;
             }
         }
-
     }
 }

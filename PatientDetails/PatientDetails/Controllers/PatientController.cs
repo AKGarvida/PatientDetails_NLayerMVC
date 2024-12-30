@@ -53,8 +53,6 @@ namespace PatientDetails.Controllers
             }
         }
 
-
-
         // GET: Create Patient
         public ActionResult Create()
         {
@@ -90,10 +88,48 @@ namespace PatientDetails.Controllers
             return View(pdEntities);
         }
 
-        public ActionResult Edit()
+        // GET: Edit
+        public ActionResult Edit(int id)
         {
-            return View();
+            var patient = _createBll.GetPatients().Find(p => p.ID == id);
+            if (patient == null)
+            {
+                TempData["Error"] = "Patient not found.";
+                return RedirectToAction("Index");
+            }
+
+            return View(patient);
         }
+
+        [HttpPost]
+        public ActionResult Edit(PatientDetailEntities pdEntities)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["Error"] = "Invalid data. Please check the form inputs.";
+                return View(pdEntities);
+            }
+
+            try
+            {
+                var result = _createBll.UpdatePatient(pdEntities);
+
+                if (result != null)
+                {
+                    TempData["Success"] = "Patient record updated successfully.";
+                    return RedirectToAction("Index");
+                }
+
+                TempData["Error"] = "Failed to update patient record. Please try again.";
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = $"An error occurred: {ex.Message}";
+            }
+
+            return View(pdEntities);
+        }
+
 
         [HttpPost]
         public JsonResult DeletePatient(int id)
