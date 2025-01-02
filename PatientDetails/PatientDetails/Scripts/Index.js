@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    $("#date").attr("placeholder", "dd/MM/yyyy");
+    //$("#date").attr("placeholder", "dd-MM-yyyy");
     const rowsPerPage = 5; // Number of rows per page
     const tableBody = $("table tbody");
     const pagination = $(".pagination");
@@ -51,7 +51,7 @@
     renderTablePage(1);
 
     // ------------- Delete & Edit Modal Script -------------
-    $(document).on('click', '.btn-danger', function () {
+    $(document).on('click', '.deleteBtn', function () {
         const rowToDelete = $(this).closest('tr');
         const patientId = rowToDelete.data('id');
 
@@ -74,22 +74,6 @@
                     $('#actionModal').modal('hide');
                 },
             });
-        });
-    });
-
-    // ------------- Edit Record Script -------------
-    $(document).on('click', '.btn-primary', function () {
-        const patientId = $(this).closest('tr').data('id');
-
-        $('#actionModalLabel').text('Edit Record');
-        $('#modalBody').html('<p>Do you want to edit this record?</p>');
-        $('#confirmAction').text('Edit').removeClass('btn-danger').addClass('btn-primary');
-        $('#actionModal').modal('show');
-
-        // Confirm edit action
-        $('#confirmAction').off('click').on('click', function () {
-            // Redirect to the Edit page once confirmed
-            window.location.href = `/Patient/Edit/${patientId}`;
         });
     });
 
@@ -117,10 +101,11 @@
                         tbody.append(`
                         <tr data-id="${patient.ID}">
                             <td>
-                                <button type="button" class="btn btn-primary me-2" data-bs-toggle="tooltip" title="Edit Record">Edit</button>
-                                <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" title="Delete Record">Delete</button>
+                                <button type="button" class="btn editBtn btn-dark me-2" data-bs-toggle="tooltip" title="Edit Record"
+                                onclick = "window.location.href = '/Patient/Edit/' + ${ patient.ID }">Edit</button>
+                                <button type="button" class="btn deleteBtn btn-dark" data-bs-toggle="tooltip" title="Delete Record">Delete</button>
                             </td>
-                            <td>${new Date(patient.ModifiedDate).toLocaleDateString('en-GB')}</td>
+                            <td>${new Date(patient.ModifiedDate).toLocaleDateString()}</td>
                             <td>${parseFloat(patient.Dosage).toFixed(4)}</td>
                             <td>${patient.Drug}</td>
                             <td>${patient.Patient}</td>
