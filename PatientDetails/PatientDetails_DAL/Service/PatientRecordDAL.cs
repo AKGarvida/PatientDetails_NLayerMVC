@@ -72,7 +72,7 @@ namespace PatientDetails_DAL.Service
             {
                 using (SqlConnection conn = new SqlConnection(MSSQLConnectionProvider.GetConnectionString()))
                 {
-                    using (SqlCommand cmd = new SqlCommand("spCreateNewPatient", conn))
+                    using (SqlCommand cmd = new SqlCommand("spPatientCreate", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = MSSQLConnectionProvider.GetConnectionTimeout();
@@ -106,7 +106,7 @@ namespace PatientDetails_DAL.Service
             {
                 using (SqlConnection conn = new SqlConnection(MSSQLConnectionProvider.GetConnectionString()))
                 {
-                    using (SqlCommand cmd = new SqlCommand("spUpdatePatientRecord", conn))
+                    using (SqlCommand cmd = new SqlCommand("spPatientRecordUpdate", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@ID", SqlDbType.Int).Value = c.ID;
@@ -134,7 +134,7 @@ namespace PatientDetails_DAL.Service
             {
                 using (SqlConnection conn = new SqlConnection(MSSQLConnectionProvider.GetConnectionString()))
                 {
-                    using (SqlCommand cmd = new SqlCommand("spDeletePatientRecord", conn))
+                    using (SqlCommand cmd = new SqlCommand("spPatientRecordDelete", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = MSSQLConnectionProvider.GetConnectionTimeout();
