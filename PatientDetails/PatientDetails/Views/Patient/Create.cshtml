@@ -10,7 +10,7 @@
     <div class="card mb-3" style="max-width: 100%; min-width: 70%; border-width: 2px; border-color: #000000">
 
         <div class="card-header bg-dark" style="border-width: 2px; border-color: #000000">
-            <h2 class="text-center text-white">Create New Patient Record</h2>
+            <h2 class="text-center text-white">Create Patient Record</h2>
         </div>
 
         <div class="card-body" style="border-width: 2px; border-color: #000000">
@@ -63,4 +63,23 @@
         </div>
     </div>
 </div>
+
+<!-- Modal for Create -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="actionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="actionModalLabel"></h5>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content dynamically added -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-dark" id="confirmAction">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="~/Scripts/Create.js"></script>

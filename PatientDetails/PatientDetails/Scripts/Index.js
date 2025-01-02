@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     //$("#date").attr("placeholder", "dd-MM-yyyy");
-    const rowsPerPage = 5; // Number of rows per page
+    const rowsPerPage = 5; 
     const tableBody = $("table tbody");
     const pagination = $(".pagination");
 
@@ -29,13 +29,18 @@
 
         pagination.append(`<li class="page-item ${previousDisabled}"><a class="page-link text-white bg-dark" href="#" data-page="${currentPage - 1}">Previous</a></li>`);
 
-        for (let i = 1; i <= totalPages; i++) {
+        // Calculate range for page numbers to display
+        const startPage = Math.max(1, currentPage - 1);
+        const endPage = Math.min(totalPages, currentPage + 1);
+
+        for (let i = startPage; i <= endPage; i++) {
             const activeClass = currentPage === i ? "active" : "";
             pagination.append(`<li class="page-item ${activeClass}"><a class="page-link text-white bg-dark" href="#" data-page="${i}">${i}</a></li>`);
         }
 
         pagination.append(`<li class="page-item ${nextDisabled}"><a class="page-link text-white bg-dark" href="#" data-page="${currentPage + 1}">Next</a></li>`);
     }
+
 
     // Handle pagination click
     pagination.on("click", ".page-link", function (e) {
