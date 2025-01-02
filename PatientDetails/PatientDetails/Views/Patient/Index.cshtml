@@ -1,6 +1,4 @@
-﻿
-
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -48,35 +46,13 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach (var patient in Model)
-                    {
-                        <tr data-id="@patient.ID">
-                            <td style="background-color: white;">
-                                <button type="button" class="btn btn-primary me-2 btnEdit" data-id="@patient.ID" data-bs-toggle="tooltip" title="Edit Record">
-                                    Edit
-                                </button>
-                                <button type="button" class="btn btn-danger" id="btnDelete" data-bs-toggle="tooltip" title="Delete Record">Delete</button>
-                            </td>
-                            <td style="background-color: white; color: black;">@patient.ModifiedDate.ToString("dd/MM/yyyy")</td>
-                            <td style="background-color: white; color: black;">@patient.Dosage</td>
-                            <td style="background-color: white; color: black;">@patient.Drug</td>
-                            <td style="background-color: white; color: black;">@patient.Patient</td>
-                        </tr>
-                    }
-                </tbody>
+                <tbody> </tbody>
             </table>
         </div>
     </div>
     <div class=" card-footer" style="border-width: 2px; border-color: #000000">
         <!-- page number -->
-        <ul class="pagination d-flex justify-content-center">
-            <li class="page-item"><a class="page-link text-white bg-dark" href="#">Previous</a></li>
-            <li class="page-item active"><a class="page-link text-white bg-dark" href="#">1</a></li>
-            <li class="page-item"><a class="page-link text-white bg-dark" href="#">2</a></li>
-            <li class="page-item"><a class="page-link text-white bg-dark" href="#">3</a></li>
-            <li class="page-item"><a class="page-link text-white bg-dark" href="#">Next</a></li>
-        </ul>
+        <ul class="pagination d-flex justify-content-center"> </ul>
     </div>
 </div>
 <!-- Modal for Edit/Delete -->

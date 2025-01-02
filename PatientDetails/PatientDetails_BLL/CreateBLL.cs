@@ -67,7 +67,7 @@ namespace PatientDetails_BLL
 
         public PatientDetailEntities UpdatePatient(PatientDetailEntities patient)
         {
-            ValidatePatientDetails(patient); 
+            ValidatePatientDetails(patient);
 
             try
             {
