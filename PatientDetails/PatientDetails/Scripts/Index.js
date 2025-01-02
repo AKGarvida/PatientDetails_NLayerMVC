@@ -73,6 +73,9 @@
                 success: function (response) {
                     rowToDelete.remove();
                     $('#actionModal').modal('hide');
+
+                    // Show success modal
+                    $('#successModal').modal('show');
                 },
                 error: function (xhr, status, error) {
                     console.error("Error deleting record:", error);
@@ -81,6 +84,8 @@
             });
         });
     });
+
+
 
     // ------------- Filtered Search Script -------------
     function ajaxFilterTable() {
