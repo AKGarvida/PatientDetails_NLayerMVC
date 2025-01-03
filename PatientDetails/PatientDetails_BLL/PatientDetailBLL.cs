@@ -80,8 +80,6 @@ namespace PatientDetails_BLL
             }
         }
 
-
-
         public bool DeletePatient(int id)
         {
             try

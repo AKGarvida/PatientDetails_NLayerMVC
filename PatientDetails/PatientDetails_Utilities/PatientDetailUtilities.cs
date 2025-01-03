@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PatientDetails_Utilities
 {
-    public class Class1
+    public class PatientDetailUtilities
     {
     }
 }
