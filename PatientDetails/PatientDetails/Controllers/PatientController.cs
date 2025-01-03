@@ -9,18 +9,17 @@ namespace PatientDetails.Controllers
 {
     public class PatientController : Controller
     {
-        private readonly CreateBLL _createBll;
+        private readonly PatientDetailBLL _pdBLL;
 
         public PatientController()
         {
-            _createBll = new CreateBLL();
+            _pdBLL = new PatientDetailBLL();
         }
 
         // GET: Patient
         public ActionResult Index()
         {
-            var bll = new CreateBLL();
-            var patients = bll.GetPatients();
+            var patients = _pdBLL.GetPatients();
 
             if (patients == null)
             {
@@ -36,7 +35,7 @@ namespace PatientDetails.Controllers
             {
                 DateTime? modifiedDate = string.IsNullOrWhiteSpace(date) ? (DateTime?)null : DateTime.Parse(date);
                 decimal? dosageValue = string.IsNullOrWhiteSpace(dosage) ? (decimal?)null : decimal.Parse(dosage);
-                var patients = _createBll.GetPatients(patient, drug, dosageValue, modifiedDate);
+                var patients = _pdBLL.GetPatients(patient, drug, dosageValue, modifiedDate);
                 return Json(patients.Select(p => new
                 {
                     p.ID,
@@ -70,7 +69,7 @@ namespace PatientDetails.Controllers
 
             try
             {
-                var result = _createBll.CreatePatient(pdEntities);
+                var result = _pdBLL.CreatePatient(pdEntities);
 
                 if (result != null)
                 {
@@ -91,7 +90,7 @@ namespace PatientDetails.Controllers
         // GET: Edit
         public ActionResult Edit(int id)
         {
-            var patient = _createBll.GetPatients().Find(p => p.ID == id);
+            var patient = _pdBLL.GetPatients().Find(p => p.ID == id);
             if (patient == null)
             {
                 TempData["Error"] = "Patient not found.";
@@ -112,7 +111,7 @@ namespace PatientDetails.Controllers
 
             try
             {
-                var result = _createBll.UpdatePatient(pdEntities);
+                var result = _pdBLL.UpdatePatient(pdEntities);
 
                 if (result != null)
                 {
@@ -136,7 +135,7 @@ namespace PatientDetails.Controllers
         {
             try
             {
-                bool isDeleted = _createBll.DeletePatient(id);
+                bool isDeleted = _pdBLL.DeletePatient(id);
                 if (isDeleted)
                 {
                     return Json(new { success = true, message = "Record deleted successfully." });
