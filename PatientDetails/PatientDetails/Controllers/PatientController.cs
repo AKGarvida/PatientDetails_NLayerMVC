@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using PatientDetails_BLL;
 using System.Collections.Generic;
 using System.Linq;
+using PatientDetails_Utilities;
 
 namespace PatientDetails.Controllers
 {
@@ -63,7 +64,7 @@ namespace PatientDetails.Controllers
         {
             if (!ModelState.IsValid)
             {
-                TempData["Error"] = "Invalid data. Please check the form inputs.";
+                TempData["Error"] = PatientDetailUtilities.Create_Failure_Message;
                 return View(pdEntities);
             }
 
